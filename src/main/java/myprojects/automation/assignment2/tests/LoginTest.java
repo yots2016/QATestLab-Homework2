@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 public class LoginTest extends BaseScript {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         WebDriver driver = getDriver();
         driver.get(Properties.getBaseAdminUrl());
 
