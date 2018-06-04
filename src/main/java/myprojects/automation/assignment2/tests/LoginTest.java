@@ -21,18 +21,26 @@ public class LoginTest extends BaseScript {
         WebElement loginButton = driver.findElement(By.name("submitLogin"));
         loginButton.click();
 
-        Thread.sleep(3000);
+        setSleepTime(3000);
 
         WebElement employeeAvatar = driver.findElement(By.className("employee_avatar_small"));
         employeeAvatar.click();
 
-        Thread.sleep(3000);
+        setSleepTime(3000);
 
         WebElement headerLogout = driver.findElement(By.id("header_logout"));
         headerLogout.click();
 
-        Thread.sleep(2000);
+        setSleepTime(2000);
 
         driver.close();
+    }
+
+    private static void setSleepTime(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
