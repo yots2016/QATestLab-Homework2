@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginTest extends BaseScript {
+    private static final int ONE_SECOND = 1000;
 
     public static void main(String[] args) {
         WebDriver driver = getDriver();
@@ -21,17 +22,17 @@ public class LoginTest extends BaseScript {
         WebElement loginButton = driver.findElement(By.name("submitLogin"));
         loginButton.click();
 
-        setSleepTime(3000);
+        setSleepTime(ONE_SECOND);
 
         WebElement employeeAvatar = driver.findElement(By.className("employee_avatar_small"));
         employeeAvatar.click();
 
-        setSleepTime(3000);
+        setSleepTime(ONE_SECOND);
 
         WebElement headerLogout = driver.findElement(By.id("header_logout"));
         headerLogout.click();
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
         driver.close();
     }

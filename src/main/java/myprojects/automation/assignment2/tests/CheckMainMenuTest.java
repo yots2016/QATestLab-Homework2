@@ -5,11 +5,15 @@ import myprojects.automation.assignment2.utils.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CheckMainMenuTest extends BaseScript{
+    private static final int ONE_SECOND = 1000;
+
+    private static final WebDriver driver = getDriver();
 
     public static void main(String[] args) {
-        WebDriver driver = getDriver();
+
         driver.get(Properties.getBaseAdminUrl());
 
         WebElement email = driver.findElement(By.id("email"));
@@ -21,113 +25,61 @@ public class CheckMainMenuTest extends BaseScript{
         WebElement loginButton = driver.findElement(By.name("submitLogin"));
         loginButton.click();
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminDashboard = driver.findElement(By.id("tab-AdminDashboard"));
-        adminDashboard.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("tab-AdminDashboard")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminParentOrders = driver.findElement(By.id("subtab-AdminParentOrders"));
-        adminParentOrders.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminParentOrders")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminCatalog = driver.findElement(By.id("subtab-AdminCatalog"));
-        adminCatalog.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminCatalog")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
         driver.navigate().back();
-        WebElement adminParentCustomer = driver.findElement(By.id("subtab-AdminParentCustomer"));
-        adminParentCustomer.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminParentCustomer")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminParentCustomerThreads = driver.findElement(By.id("subtab-AdminParentCustomerThreads"));
-        adminParentCustomerThreads.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminParentCustomerThreads")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminStats = driver.findElement(By.id("subtab-AdminStats"));
-        adminStats.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminStats")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminParentModulesSf = driver.findElement(By.id("subtab-AdminParentModulesSf"));
-        adminParentModulesSf.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminParentModulesSf")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
         driver.navigate().back();
-        WebElement adminParentThemes = driver.findElement(By.id("subtab-AdminParentThemes"));
-        adminParentThemes.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminParentThemes")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminParentShipping = driver.findElement(By.id("subtab-AdminParentShipping"));
-        adminParentShipping.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminParentShipping")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminParentPayment = driver.findElement(By.id("subtab-AdminParentPayment"));
-        adminParentPayment.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminParentPayment")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminInternational = driver.findElement(By.id("subtab-AdminInternational"));
-        adminInternational.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminInternational")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement shopParameters = driver.findElement(By.id("subtab-ShopParameters"));
-        shopParameters.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-ShopParameters")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
-        WebElement adminAdvancedParameters = driver.findElement(By.id("subtab-AdminAdvancedParameters"));
-        adminAdvancedParameters.click();
-        System.out.println(driver.getTitle());
-        setSleepTime(2000);
-        driver.navigate().refresh();
+        checkMenuItem(driver.findElement(By.id("subtab-AdminAdvancedParameters")));
 
-        setSleepTime(2000);
+        setSleepTime(ONE_SECOND);
 
         driver.close();
     }
@@ -138,5 +90,19 @@ public class CheckMainMenuTest extends BaseScript{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void checkSectionCorrectness(String title, WebDriver driver) {
+        System.out.println("The user remains in the same section after the page refresh? - "
+                + title.equals(driver.getTitle()));
+    }
+
+    private static void checkMenuItem(WebElement webElement) {
+        webElement.click();
+        String initialTitleOfSection = driver.getTitle();
+        System.out.println(initialTitleOfSection);
+        setSleepTime(2000);
+        driver.navigate().refresh();
+        checkSectionCorrectness(initialTitleOfSection, driver);
     }
 }
