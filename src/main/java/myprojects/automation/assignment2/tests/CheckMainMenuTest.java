@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CheckMainMenuTest extends BaseScript{
     private static final int ONE_SECOND = 1000;
+    private static final int TWO_SECOND = 2000;
 
     private static final WebDriver driver = getDriver();
 
@@ -101,7 +102,7 @@ public class CheckMainMenuTest extends BaseScript{
         webElement.click();
         String initialTitleOfSection = driver.getTitle();
         System.out.println(initialTitleOfSection);
-        setSleepTime(2000);
+        setSleepTime(TWO_SECOND);
         driver.navigate().refresh();
         checkSectionCorrectness(initialTitleOfSection, driver);
     }
