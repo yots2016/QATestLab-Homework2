@@ -5,13 +5,18 @@ import myprojects.automation.assignment2.utils.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheckMainMenuTest extends BaseScript{
     private static final int ONE_SECOND = 1000;
     private static final int TWO_SECOND = 2000;
 
     private static final WebDriver driver = getDriver();
+
+    private static List<String> idsList = new ArrayList<>();
+
 
     public static void main(String[] args) {
 
@@ -28,61 +33,33 @@ public class CheckMainMenuTest extends BaseScript{
 
         setSleepTime(ONE_SECOND);
 
-        checkMenuItem(driver.findElement(By.id("tab-AdminDashboard")));
+        inializeIdsList();
 
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminParentOrders")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminCatalog")));
-
-        setSleepTime(ONE_SECOND);
-
-        driver.navigate().back();
-        checkMenuItem(driver.findElement(By.id("subtab-AdminParentCustomer")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminParentCustomerThreads")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminStats")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminParentModulesSf")));
-
-        setSleepTime(ONE_SECOND);
-
-        driver.navigate().back();
-        checkMenuItem(driver.findElement(By.id("subtab-AdminParentThemes")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminParentShipping")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminParentPayment")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminInternational")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-ShopParameters")));
-
-        setSleepTime(ONE_SECOND);
-
-        checkMenuItem(driver.findElement(By.id("subtab-AdminAdvancedParameters")));
-
-        setSleepTime(ONE_SECOND);
+        for (String id : idsList) {
+            if (id.equals("subtab-AdminParentCustomer") || id.equals("subtab-AdminParentThemes")) {
+                driver.navigate().back();
+            }
+            checkMenuItem(driver.findElement(By.id(id)));
+            setSleepTime(ONE_SECOND);
+        }
 
         driver.quit();
+    }
+
+    private static void inializeIdsList() {
+        idsList.add("tab-AdminDashboard");
+        idsList.add("subtab-AdminParentOrders");
+        idsList.add("subtab-AdminCatalog");
+        idsList.add("subtab-AdminParentCustomer");
+        idsList.add("subtab-AdminParentCustomerThreads");
+        idsList.add("subtab-AdminStats");
+        idsList.add("subtab-AdminParentModulesSf");
+        idsList.add("subtab-AdminParentThemes");
+        idsList.add("subtab-AdminParentShipping");
+        idsList.add("subtab-AdminParentPayment");
+        idsList.add("subtab-AdminInternational");
+        idsList.add("subtab-ShopParameters");
+        idsList.add("subtab-AdminAdvancedParameters");
     }
 
     private static void setSleepTime(long millis) {
@@ -93,9 +70,9 @@ public class CheckMainMenuTest extends BaseScript{
         }
     }
 
-    private static void checkSectionCorrectness(String title, WebDriver driver) {
+    private static void checkSectionCorrectness(String title) {
         System.out.println("The user remains in the same section after the page refresh? - "
-                + title.equals(driver.getTitle()));
+                + title.equals(CheckMainMenuTest.driver.getTitle()));
     }
 
     private static void checkMenuItem(WebElement webElement) {
@@ -104,6 +81,6 @@ public class CheckMainMenuTest extends BaseScript{
         System.out.println(initialTitleOfSection);
         setSleepTime(TWO_SECOND);
         driver.navigate().refresh();
-        checkSectionCorrectness(initialTitleOfSection, driver);
+        checkSectionCorrectness(initialTitleOfSection);
     }
 }

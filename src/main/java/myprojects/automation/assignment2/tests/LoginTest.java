@@ -34,7 +34,7 @@ public class LoginTest extends BaseScript {
 
         setSleepTime(ONE_SECOND);
 
-        driver.close();
+        driver.quit();
     }
 
     private static void setSleepTime(long millis) {
