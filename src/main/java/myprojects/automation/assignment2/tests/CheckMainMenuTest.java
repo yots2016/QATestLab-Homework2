@@ -82,7 +82,7 @@ public class CheckMainMenuTest extends BaseScript{
 
         setSleepTime(ONE_SECOND);
 
-        driver.close();
+        driver.quit();
     }
 
     private static void setSleepTime(long millis) {
